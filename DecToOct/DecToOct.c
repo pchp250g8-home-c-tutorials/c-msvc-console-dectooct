@@ -9,10 +9,10 @@
 
 int main(int argc, char* argv[])
 {
-    long uDecNumber, uTempVal;
+    long long uDecNumber, uTempVal;
     unsigned int nOctalDigits = 0;
     printf("Input an unsigned integer number\r\n");
-    scanf("%lu", &uDecNumber);
+    scanf("%lld", &uDecNumber);
     if (uDecNumber < 0 || uDecNumber > UINT32_MAX)
     {
         printf("Incorrect number format\r\n");
@@ -34,16 +34,18 @@ int main(int argc, char* argv[])
         uTempVal = uDecNumber;
         for (unsigned int i = 0; i < nOctalDigits; i++)
         {
-            char chBinDighit = '0' + (uTempVal % 8);
-            szOctalNum[nOctalDigits - 1 - i] = chBinDighit;
+            int nOctDigit = uTempVal % 8;
+            char chOctDighit = '0' + nOctDigit;
+            szOctalNum[nOctalDigits - 1 - i] = chOctDighit;
             uTempVal /= 8;
         }
-        printf("The octal equivalent of the decimal numner %lu is %s\r\n",uDecNumber,szOctalNum);
+        printf("The octal equivalent of the decimal number %lld is %s\r\n",uDecNumber,szOctalNum);
         free(szOctalNum);
     }
     else
     {
-        printf("The octal equivalent of the decimal number %lu is 0\r\n", uDecNumber);
+        char szOctalNum[] = "0";
+        printf("The octal equivalent of the decimal number %lld is %s\r\n", uDecNumber,szOctalNum);
     }
     getchar();
     getc(stdin);
